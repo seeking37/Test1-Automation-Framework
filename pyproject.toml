@@ -21,3 +21,15 @@ dependencies = [
     "xlrd>=2.0.1",
     "xlutils>=2.0.0",
 ]
+
+[tool.setuptools]
+packages = [
+    "base",
+    "demo",
+    "data",
+    "conf",
+    "common",
+    "report",
+    "testcase",
+    "mock_server"
+]
