@@ -22,24 +22,21 @@ jobs:
       run: |
         curl -LsSf https://astral.sh/uv/install.sh | sh
         
-    - name: Install dependencies
-      run: |
-        uv venv
-        source .venv/bin/activate
-        uv sync
-        
     - name: Start mock server
       run: |
         cd mock_server/api_server
-        source ../../.venv/bin/activate
-        uv run base/flak_server.py &
+        uv run base/flask_service.py &
         sleep 5  # 等待服务器启动
+        
+    - name: Install dependencies
+      run: |
+        uv sync
+        source .venv/bin/activate
         
     - name: Run tests
       env:
         PYTHONPATH: ${{ github.workspace }}
       run: |
-        source .venv/bin/activate
         pytest --alluredir=./allure-results
         
     - name: Upload test results
